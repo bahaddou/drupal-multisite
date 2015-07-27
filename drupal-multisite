@@ -1,0 +1,6 @@
+#!/bin/bash
+cp /etc/apache2/sites-available/$1.vhost /etc/apache2/sites-available/$2.vhost
+sed -i "10 s/ServerName $1/ServerName $2/" $2.vhost
+sed -i "11 s/ServerAlias www.$1/ServerAlias www.$2/" $2.vhost
+service apache2 reload &> /dev/null
+echo "$2 refered to $1 : OK"
